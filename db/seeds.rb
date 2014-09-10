@@ -8,12 +8,14 @@
 
 API_URL = 'https://www.kimonolabs.com/api/5qmrs778'
 API_KEY = '8hPGeCrFvniquWQrteEpwUkeUzD7ZIVN'
+API_OPTS = { kimbypage: 1 }
 
-response = RestClient.get API_URL,
-                          params: { apikey: API_KEY,
-                                    kimbypage: 1,
-                                    kimwithurl: 1,
-                                    kimhash: 1,
-                                    kimindex: 1 }
+importer = Vgmdbnet::AlbumImporter.new(API_URL, API_KEY, API_OPTS)
 
-puts JSON.parse(response)
+importer.results.each do |result|
+  album_json = Vgmdbnet::AlbumParser.album_from_json(result)
+  tracks_json = Vgmdbnet::AlbumParser.tracks_from_json(result)
+  album = Album.create!(album_json)
+  # change import style if need validations on tracks
+  album.tracks.import [:title, :number, :duration], tracks_json.map(&:values)
+end

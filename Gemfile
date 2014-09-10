@@ -42,6 +42,13 @@ gem 'spring',        group: :development
 gem 'ember-rails', '~> 0.15.0'
 gem 'ember-source', '~> 1.7.0'
 
-# Simple HTTP and REST client for Ruby, inspired by microframework syntax for
-# specifying actions.
-gem 'rest_client', group: :development
+group :development do
+  # Simple HTTP and REST client for Ruby, inspired by microframework syntax for
+  # specifying actions.
+  gem 'rest_client', '~> 1.7.3' # Use HTTParty?
+
+  # Debugging in Ruby 2
+  gem 'byebug', '~> 3.4.0'
+end
+
+gem 'activerecord-import', '~> 0.5.0'

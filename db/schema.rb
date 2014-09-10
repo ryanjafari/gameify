@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140902004213) do
+ActiveRecord::Schema.define(version: 20140907023232) do
 
   create_table "albums", force: true do |t|
     t.string   "catalog_number"
@@ -27,6 +27,16 @@ ActiveRecord::Schema.define(version: 20140902004213) do
     t.string   "performed_by"
     t.string   "lyrics_by"
     t.text     "notes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "api_id"
+  end
+
+  create_table "tracks", force: true do |t|
+    t.integer  "album_id"
+    t.string   "title"
+    t.integer  "number"
+    t.time     "duration"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

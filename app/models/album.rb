@@ -1,4 +1,5 @@
 class Album < ActiveRecord::Base
-  validates :catalog_number, presence: true, uniqueness: true
   validates :title, presence: true
+  validates :api_id, presence: true, uniqueness: true
+  has_many :tracks
 end
